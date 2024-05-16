@@ -35,6 +35,7 @@
 - Lombok
 - Flyway
 - TestContainers
+- OpenAPI
 - REST API
 - PostgreSQL
 - Maven
