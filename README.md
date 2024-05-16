@@ -30,8 +30,11 @@
 Стек:
 - Java 17
 - Spring Boot 3
-- База данных PostgreSQL
-- Maven
+- Spring Data JDBC
+- Spring Security
+- Lombok
+- Flyway
+- TestContainers
 - REST API
-- Дополнительные технологии (Redis, ElasticSearch и т.д.) на ваше усмотрение.
-- Фронтенд не нужен
+- PostgreSQL
+- Maven
