@@ -1,16 +1,12 @@
-package com.eevan.bankingservice.models;
+package com.eevan.bankingservice.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "Accounts")
 public class ClientBankAccount {
 
@@ -24,4 +20,12 @@ public class ClientBankAccount {
 
     @Column(name = "client_id")
     private int clientId;
+
+    public ClientBankAccount(BigDecimal funds, int clientId) {
+        this.funds = funds;
+        this.clientId = clientId;
+    }
+
+    public ClientBankAccount() {
+    }
 }

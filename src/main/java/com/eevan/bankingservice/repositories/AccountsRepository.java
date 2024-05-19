@@ -1,9 +1,9 @@
 package com.eevan.bankingservice.repositories;
 
-import com.eevan.bankingservice.entities.Client;
+import com.eevan.bankingservice.entities.ClientBankAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientsRepository extends JpaRepository<Client, Integer> {
+public interface AccountsRepository extends JpaRepository<ClientBankAccount, Integer> {
 }
