@@ -15,25 +15,25 @@ public class Client {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name", length = 32, nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "surname", length = 32, nullable = false)
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name = "patronymic", length = 32, nullable = false)
+    @Column(name = "patronymic")
     private String patronymic;
 
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date")
     private LocalDate dateOfBirth;
 
-    @Column(name = "phone_main", unique = true, length = 32, nullable = false)
+    @Column(name = "phone_main", unique = true)
     private int phoneNumberMain;
 
-    @Column(name = "phone_additional", unique = true, length = 32)
+    @Column(name = "phone_additional", unique = true)
     private int phoneNumberAdditional;
 
-    @Column(name = "email_main", unique = true, nullable = false)
+    @Column(name = "email_main", unique = true)
     private String emailMain;
 
     @Column(name = "email_additional", unique = true)
