@@ -58,7 +58,7 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public Client findClientByBirthdate(LocalDate birthdate) {
-        return clientsRepository.findByDateOfBirth(birthdate);
+        return clientsRepository.findByDateOfBirthAfter(birthdate);
     }
 
 }
