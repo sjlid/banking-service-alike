@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -34,8 +33,8 @@ public class ClientService {
 
     //поиск клиента по дате рождения
     @Transactional(readOnly = true)
-    public Client findClientByBirthdate() {
-        return null;
+    public Client findClientByBirthdate(LocalDate birthdate) {
+        return clientsRepository.findByDateOfBirthAfter(birthdate);
     }
 
     //поиск клиента по телефону
@@ -55,10 +54,4 @@ public class ClientService {
     public Client findClientByFIO(String fio) {
         return clientsRepository.findByNameAndSurnameAndPatronymic(fio);
     }
-
-    @Transactional(readOnly = true)
-    public Client findClientByBirthdate(LocalDate birthdate) {
-        return clientsRepository.findByDateOfBirthAfter(birthdate);
-    }
-
 }
