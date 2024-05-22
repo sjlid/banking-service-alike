@@ -2,11 +2,14 @@ package com.eevan.bankingservice.services;
 
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.repositories.ClientsRepository;
+import com.eevan.bankingservice.utils.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -31,27 +34,31 @@ public class ClientService {
     //удаление телефона
     //удаление емейла
 
-    //поиск клиента по дате рождения
+    //поиск клиентов по дате рождения
     @Transactional(readOnly = true)
-    public Client findClientByBirthdate(LocalDate birthdate) {
-        return clientsRepository.findByDateOfBirthAfter(birthdate);
+    public List<Client> findClientByBirthdate(LocalDate birthdate) {
+        Optional<List<Client>> foundClients = clientsRepository.findByDateOfBirthAfter(birthdate);
+        return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 
     //поиск клиента по телефону
     @Transactional(readOnly = true)
     public Client findClientByPhone(int number) {
-        return clientsRepository.findByPhoneNumberMain(number);
+        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMain(number);
+        return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 
     //поиск клиента по емейлу
     @Transactional(readOnly = true)
     public Client findClientByEmail(String email) {
-        return clientsRepository.findByEmailMain(email);
+        Optional<Client> foundClient = clientsRepository.findByEmailMain(email);
+        return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 
     //поиск клиента по ФИО
     @Transactional(readOnly = true)
-    public Client findClientByFIO(String fio) {
-        return clientsRepository.findByNameAndSurnameAndPatronymic(fio);
+    public List<Client> findClientByFIO(String fio) {
+        Optional<List<Client>> foundClients = clientsRepository.findByNameAndSurnameAndPatronymic(fio);
+        return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 }
