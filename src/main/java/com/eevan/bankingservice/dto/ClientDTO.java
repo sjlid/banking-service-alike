@@ -31,5 +31,7 @@ public class ClientDTO {
     private String emailMain;
     private String emailAdditional;
 
+    private String username;
 
+    private String password;
 }

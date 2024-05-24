@@ -1,5 +1,6 @@
 package com.eevan.bankingservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.observation.ObservationFilter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -52,6 +53,10 @@ public class Client {
     @OneToOne
     @JoinColumn(name = "account_id")
     private ClientBankAccount clientBankAccount;
+
+    private String username;
+    @JsonIgnore
+    private String password;
 
     public Client(String name, String surname, String patronymic, LocalDate dateOfBirth, int phoneNumberMain, int phoneNumberAdditional, String emailMain, String emailAdditional) {
         this.name = name;
