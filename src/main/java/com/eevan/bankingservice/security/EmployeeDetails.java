@@ -49,4 +49,9 @@ public class EmployeeDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    //for getting data of authenticated user
+    public Employee getEmployee() {
+        return this.employee;
+    }
 }
