@@ -62,6 +62,11 @@ public class Client {
     @JoinColumn(name = "account_id")
     private ClientBankAccount clientBankAccount;
 
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
     public Client(String name, String surname, String patronymic, LocalDate dateOfBirth, int phoneNumberMain, int phoneNumberAdditional, String emailMain, String emailAdditional, String username) {
         this.name = name;
         this.surname = surname;

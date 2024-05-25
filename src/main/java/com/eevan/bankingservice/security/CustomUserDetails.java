@@ -1,33 +1,39 @@
 package com.eevan.bankingservice.security;
 
-
 import com.eevan.bankingservice.entities.Client;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-public class ClientDetails implements UserDetails {
+public class CustomUserDetails extends Client implements UserDetails {
 
-    private final Client client;
+    private String username;
+    private String password;
+    Collection<? extends GrantedAuthority> authorities;
 
-    public ClientDetails(Client client) {
-        this.client = client;
+    public CustomUserDetails(Client client) {
+        this.username = client.getUsername();
+        this.password= client.getPassword();
+        List<GrantedAuthority> auths = new ArrayList<>();
+        this.authorities = auths;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return this.client.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return this.client.getUsername();
+        return username;
     }
 
     @Override
@@ -48,10 +54,5 @@ public class ClientDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    //for getting data of authenticated user
-    public Client getClient() {
-        return this.client;
     }
 }

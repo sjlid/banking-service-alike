@@ -1,7 +1,6 @@
 package com.eevan.bankingservice.repositories;
 
 import com.eevan.bankingservice.entities.Client;
-import com.eevan.bankingservice.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +14,5 @@ public interface ClientsRepository extends JpaRepository<Client, Integer> {
     Optional<Client> findByPhoneNumberMain(int number);
     Optional<List<Client>> findByNameAndSurnameAndPatronymic(String name, String surname, String patronymic);
     Optional<List<Client>> findByDateOfBirthAfter(LocalDate birthdate);
-    Optional<Client> findByUsername(String login);
+    public Client findByUsername(String login);
 }
