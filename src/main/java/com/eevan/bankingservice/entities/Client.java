@@ -19,6 +19,14 @@ public class Client {
     @Column(name = "id")
     private long id;
 
+    @NotEmpty
+    @Column(name = "username")
+    private String username;
+
+    @NotEmpty
+    @Column(name = "password")
+    private String password;
+
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "name")
@@ -49,14 +57,6 @@ public class Client {
 
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
-
-    @NotEmpty
-    @Column(name = "username")
-    private String username;
-
-    @NotEmpty
-    @Column(name = "password")
-    private String password;
 
     @OneToOne
     @JoinColumn(name = "account_id")
