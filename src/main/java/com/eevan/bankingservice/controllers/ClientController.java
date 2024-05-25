@@ -73,8 +73,8 @@ public class ClientController {
 
     //поиск клиента по ФИО
     @GetMapping("/clients/{fio}")
-    public List<Client> getClientsByFIO(@PathVariable("fio") String fio) {
-        return clientService.findClientByFIO(fio);
+    public List<Client> getClientsByFIO(@PathVariable("name") String name, @PathVariable("surname") String surname, @PathVariable("patronymic") String patronymic) {
+        return clientService.findClientByFIO(name, surname, patronymic);
     }
 
     //маппинг из дто в объект
