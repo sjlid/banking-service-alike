@@ -1,8 +1,8 @@
 package com.eevan.bankingservice.services;
 
-import com.eevan.bankingservice.entities.Employee;
-import com.eevan.bankingservice.repositories.EmployeeRepository;
-import com.eevan.bankingservice.security.EmployeeDetails;
+import com.eevan.bankingservice.entities.Client;
+import com.eevan.bankingservice.repositories.ClientsRepository;
+import com.eevan.bankingservice.security.ClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,22 +12,22 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EmployeeDetailsService implements UserDetailsService {
-    private final EmployeeRepository employeeRepository;
+public class ClientDetailsService implements UserDetailsService {
+    private final ClientsRepository clientsRepository;
 
     @Autowired
-    public EmployeeDetailsService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public ClientDetailsService(ClientsRepository employeeRepository) {
+        this.clientsRepository = employeeRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Employee> employee = employeeRepository.findByUsername(username);
+        Optional<Client> client = clientsRepository.findByUsername(username);
 
-        if (employee.isEmpty()) {
+        if (client.isEmpty()) {
             throw new UsernameNotFoundException("User not found!");
         }
 
-        return new EmployeeDetails(employee.get());
+        return new ClientDetails(client.get());
     }
 }

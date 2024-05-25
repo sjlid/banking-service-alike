@@ -30,8 +30,4 @@ public class ClientDTO {
     @NotEmpty(message = "Email should not be empty")
     private String emailMain;
     private String emailAdditional;
-
-    private String username;
-
-    private String password;
 }

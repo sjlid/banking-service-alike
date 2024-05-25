@@ -50,11 +50,19 @@ public class Client {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
+    @NotEmpty
+    @Column(name = "username")
+    private String username;
+
+    @NotEmpty
+    @Column(name = "password")
+    private String password;
+
     @OneToOne
     @JoinColumn(name = "account_id")
     private ClientBankAccount clientBankAccount;
 
-    public Client(String name, String surname, String patronymic, LocalDate dateOfBirth, int phoneNumberMain, int phoneNumberAdditional, String emailMain, String emailAdditional) {
+    public Client(String name, String surname, String patronymic, LocalDate dateOfBirth, int phoneNumberMain, int phoneNumberAdditional, String emailMain, String emailAdditional, String username) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -63,6 +71,7 @@ public class Client {
         this.phoneNumberAdditional = phoneNumberAdditional;
         this.emailMain = emailMain;
         this.emailAdditional = emailAdditional;
+        this.username = username;
     }
 
     public Client() {

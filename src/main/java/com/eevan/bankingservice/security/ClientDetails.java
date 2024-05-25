@@ -1,18 +1,18 @@
 package com.eevan.bankingservice.security;
 
 
-import com.eevan.bankingservice.entities.Employee;
+import com.eevan.bankingservice.entities.Client;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class EmployeeDetails implements UserDetails {
+public class ClientDetails implements UserDetails {
 
-    private final Employee employee;
+    private final Client client;
 
-    public EmployeeDetails(Employee employee) {
-        this.employee = employee;
+    public ClientDetails(Client client) {
+        this.client = client;
     }
 
     @Override
@@ -22,12 +22,12 @@ public class EmployeeDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.employee.getPassword();
+        return this.client.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.employee.getUsername();
+        return this.client.getUsername();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class EmployeeDetails implements UserDetails {
     }
 
     //for getting data of authenticated user
-    public Employee getEmployee() {
-        return this.employee;
+    public Client getClient() {
+        return this.client;
     }
 }
