@@ -69,8 +69,8 @@ public class ClientController {
 
     //поиск клиента по телефону
     @GetMapping("/clients/phone")
-    public Client getClientsByPhone(@RequestParam String phoneNumber1, @RequestParam String phoneNumber2) {
-        return clientService.findClientByPhone(phoneNumber1, phoneNumber2);
+    public Client getClientsByPhone(@RequestParam String phoneNumber) {
+        return clientService.findClientByPhone(phoneNumber);
     }
 
     //поиск клиента по ФИО

@@ -43,8 +43,8 @@ public class ClientService {
 
     //поиск клиента по телефону
     @Transactional(readOnly = true)
-    public Client findClientByPhone(String phoneNumber1, String phoneNumber2) {
-        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMainOrPhoneNumberAdditionalEquals(phoneNumber1, phoneNumber2);
+    public Client findClientByPhone(String phoneNumber) {
+        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMainOrPhoneNumberAdditional(phoneNumber, phoneNumber);
         return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 
@@ -58,7 +58,7 @@ public class ClientService {
     //поиск клиента по ФИО
     @Transactional(readOnly = true)
     public List<Client> findClientByFIO(String surname, String name, String patronymic) {
-        Optional<List<Client>> foundClients = clientsRepository.findByNameAndSurnameAndPatronymic(surname, name, patronymic);
+        Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic);
         return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 }
