@@ -58,7 +58,7 @@ public class ClientService {
     //поиск клиента по ФИО
     @Transactional(readOnly = true)
     public List<Client> findClientByFIO(String surname, String name, String patronymic) {
-        Optional<List<Client>> foundClients = clientsRepository.findByNameIgnoreCaseAndSurnameIgnoreCaseAndPatronymicIgnoreCaseLike(surname, name, patronymic);
+        Optional<List<Client>> foundClients = clientsRepository.findByNameAndSurnameAndPatronymic(surname, name, patronymic);
         return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 }
