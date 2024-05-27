@@ -43,8 +43,8 @@ public class ClientService {
 
     //поиск клиента по телефону
     @Transactional(readOnly = true)
-    public Client findClientByPhone(int number) {
-        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMain(number);
+    public Client findClientByPhone(String number) {
+        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMainOrPhoneNumberAdditionalEquals(number);
         return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 

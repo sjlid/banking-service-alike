@@ -1,6 +1,7 @@
 package com.eevan.bankingservice.dto;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -20,12 +21,12 @@ public class ClientDTO {
     private String surname;
     private String patronymic;
 
-    @NotEmpty(message = "Date of birth should not be empty")
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
 
     @NotEmpty(message = "Phone should not be empty")
-    private int phoneNumberMain;
-    private int phoneNumberAdditional;
+    private String phoneNumberMain;
+    private String phoneNumberAdditional;
 
     @NotEmpty(message = "Email should not be empty")
     private String emailMain;

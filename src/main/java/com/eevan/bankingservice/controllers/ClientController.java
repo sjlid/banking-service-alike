@@ -2,15 +2,14 @@ package com.eevan.bankingservice.controllers;
 
 import com.eevan.bankingservice.dto.ClientDTO;
 import com.eevan.bankingservice.entities.Client;
-import com.eevan.bankingservice.repositories.ClientsRepository;
 import com.eevan.bankingservice.services.ClientService;
 import com.eevan.bankingservice.utils.ClientErrorResponse;
 import com.eevan.bankingservice.utils.ClientNotCreatedException;
 import com.eevan.bankingservice.utils.ClientNotFoundException;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class ClientController {
 
     private final ClientService clientService;
@@ -33,8 +32,11 @@ public class ClientController {
         this.modelMapper = modelMapper;
     }
 
+
+
+
     //добавление клиента
-    @PostMapping("/technical/add")
+    @PostMapping("/add")
     public ResponseEntity<HttpStatus> addClient(@RequestBody @Valid ClientDTO clientDTO,
                                                 BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -54,26 +56,26 @@ public class ClientController {
     }
 
     //поиск клиента по емейлу
-    @GetMapping("/clients/{email}")
-    public ClientDTO getClientsByEmail(@PathVariable("email") String email) {
+    @GetMapping("/clients/email")
+    public ClientDTO getClientsByEmail(@RequestParam String email) {
         return convertToClientDTO(clientService.findClientByEmail(email));
     }
 
     //поиск клиента по дате рождения
-    @GetMapping("/clients/{birthdate}")
-    public List<Client> getClientsByBirthdate(@PathVariable("birthdate") LocalDate birthdate) {
+    @GetMapping("/clients/birthdate")
+    public List<Client> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate) {
         return clientService.findClientByBirthdate(birthdate);
     }
 
     //поиск клиента по телефону
-    @GetMapping("/clients/{phone}")
-    public Client getClientsByPhone(@PathVariable("phone") int phone) {
+    @GetMapping("/clients/phone")
+    public Client getClientsByPhone(@RequestParam String phone) {
         return clientService.findClientByPhone(phone);
     }
 
     //поиск клиента по ФИО
-    @GetMapping("/clients/{fio}")
-    public List<Client> getClientsByFIO(@PathVariable("name") String name, @PathVariable("surname") String surname, @PathVariable("patronymic") String patronymic) {
+    @GetMapping("/clients/fio")
+    public List<Client> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
         return clientService.findClientByFIO(name, surname, patronymic);
     }
 
