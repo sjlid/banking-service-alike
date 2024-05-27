@@ -74,7 +74,7 @@ public class ClientController {
     }
 
     //поиск клиента по ФИО
-    @GetMapping("/clients/fio")
+    @GetMapping("/clients/person")
     public List<Client> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
         return clientService.findClientByFIO(name, surname, patronymic);
     }
