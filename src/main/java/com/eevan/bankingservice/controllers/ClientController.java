@@ -57,7 +57,7 @@ public class ClientController {
     }
 
     //добавление телефона
-    @PutMapping("/client/phone_additional")
+    @PutMapping("/client/edit/phone")
     public ResponseEntity<HttpStatus> addAdditionalPhone(@RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -72,6 +72,26 @@ public class ClientController {
             throw new ClientNotCreatedException(errorMessage.toString());
         }
         clientService.addPhone(convertToClient(clientDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    //добавление емейла
+    @PutMapping("/client/edit/email")
+    public ResponseEntity<HttpStatus> addAdditionalEmail(@RequestBody @Valid ClientDTO clientDTO,
+                                                         BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ClientNotCreatedException(errorMessage.toString());
+        }
+        clientService.addEmail(convertToClient(clientDTO));
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
