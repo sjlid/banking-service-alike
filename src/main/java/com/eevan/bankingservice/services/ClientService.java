@@ -28,22 +28,6 @@ public class ClientService {
         clientsRepository.save(client);
     }
 
-    //добавление/изменение второго телефона
-    @Transactional
-    public void addAdditionalPhone(int id, String phoneNumber) {
-        Client updatedClient = findClientById(id);
-        updatedClient.setPhoneNumberAdditional(phoneNumber);
-        clientsRepository.save(updatedClient);
-    }
-
-    //добавление/изменение второго емейла
-    @Transactional
-    public void addAdditionalEmail(int id, String email) {
-        Client updatedClient = findClientById(id);
-        updatedClient.setEmailAdditional(email);
-        clientsRepository.save(updatedClient);
-    }
-
     //изменение основного телефона
     @Transactional
     public void changeMainPhone(int id, String phoneNumber) {
@@ -60,9 +44,37 @@ public class ClientService {
         clientsRepository.save(updatedClient);
     }
 
-    //удаление телефона
+    //добавление/изменение второго телефона
+    @Transactional
+    public void addAdditionalPhone(int id, String phoneNumber) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setPhoneNumberAdditional(phoneNumber);
+        clientsRepository.save(updatedClient);
+    }
 
-    //удаление емейла
+    //добавление/изменение второго емейла
+    @Transactional
+    public void addAdditionalEmail(int id, String email) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setEmailAdditional(email);
+        clientsRepository.save(updatedClient);
+    }
+
+    //удаление второго телефона
+    @Transactional
+    public void deleteAdditionalPhone(int id) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setPhoneNumberAdditional(null);
+        clientsRepository.save(updatedClient);
+    }
+
+    //удаление второго емейла
+    @Transactional
+    public void deleteAdditionalEmail(int id) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setEmailAdditional(null);
+        clientsRepository.save(updatedClient);
+    }
 
     //поиск клиентов по дате рождения
     @Transactional(readOnly = true)
