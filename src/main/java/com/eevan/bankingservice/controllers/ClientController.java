@@ -2,6 +2,7 @@ package com.eevan.bankingservice.controllers;
 
 import com.eevan.bankingservice.dto.ClientDTO;
 import com.eevan.bankingservice.dto.ClientEmailDTO;
+import com.eevan.bankingservice.dto.ClientPhoneDTO;
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.services.ClientService;
 import com.eevan.bankingservice.utils.ClientErrorResponse;
@@ -56,7 +57,7 @@ public class ClientController {
 
     //изменение основного телефона
     @PutMapping("/client/{id}/main_phone")
-    public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                       BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -69,14 +70,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.changeMainPhone(id, clientDTO.getPhoneNumberMain());
+        clientService.changeMainPhone(id, clientPhoneDTO.getPhoneNumberMain());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //изменение основного емейла
     @PutMapping("/client/{id}/main_email")
-    public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -89,14 +90,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.changeMainEmail(id, clientDTO.getEmailMain());
+        clientService.changeMainEmail(id, clientEmailDTO.getEmailMain());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //добавление/изменение второго телефона
     @PutMapping("/client/{id}/second_phone")
-    public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -109,14 +110,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addAdditionalPhone(id, clientDTO.getPhoneNumberAdditional());
+        clientService.addAdditionalPhone(id, clientPhoneDTO.getPhoneNumberAdditional());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //добавление/изменение второго емейла
     @PutMapping("/client/{id}/second_email")
-    public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -129,14 +130,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addAdditionalEmail(id, clientDTO.getEmailAdditional());
+        clientService.addAdditionalEmail(id, clientEmailDTO.getEmailAdditional());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //удаление второго номера телефона
     @PutMapping("/client/{id}/cleared_phone")
-    public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                             BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -156,7 +157,7 @@ public class ClientController {
 
     //удаление второго емейла
     @PutMapping("/client/{id}/cleared_email")
-    public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                             BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
