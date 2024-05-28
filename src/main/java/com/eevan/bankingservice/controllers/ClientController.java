@@ -37,7 +37,7 @@ public class ClientController {
 
 
     //добавление клиента
-    @PostMapping("/add")
+    @PostMapping("/client")
     public ResponseEntity<HttpStatus> addClient(@RequestBody @Valid ClientDTO clientDTO,
                                                 BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -57,7 +57,7 @@ public class ClientController {
     }
 
     //добавление телефона
-    @PutMapping("/client/edit/phone")
+    @PutMapping("/client/{id}/phone")
     public ResponseEntity<HttpStatus> addAdditionalPhone(@RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -71,13 +71,13 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addPhone(convertToClient(clientDTO));
+        //TODO
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //добавление емейла
-    @PutMapping("/client/edit/email")
+    @PutMapping("/client/{id}/email")
     public ResponseEntity<HttpStatus> addAdditionalEmail(@RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {

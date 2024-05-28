@@ -29,18 +29,14 @@ public class ClientService {
 
     //добавление телефона
     @Transactional
-    public void addPhone(Client client) {
-        if (clientsRepository.existsById(client.getId()) && client.getPhoneNumberAdditional() == null) {
-            clientsRepository.save(client);
-        }
+    public void addPhone(int id, String phoneNumber) {
+        //TODO
     }
 
     //добавление емейла
     @Transactional
     public void addEmail(Client client) {
-        if (clientsRepository.existsById(client.getId()) && client.getEmailAdditional() == null) {
-            clientsRepository.save(client);
-        }
+        //TODO
     }
     //изменение телефона
     //изменение емейла
