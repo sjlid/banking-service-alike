@@ -58,8 +58,8 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //добавление телефона
-    @PutMapping("/client/{id}/phone")
+    //добавление/изменение второго телефона
+    @PutMapping("/client/{id}/second_phone")
     public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -73,13 +73,13 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addPhone(id, clientDTO.getPhoneNumberAdditional());
+        clientService.addAdditionalPhone(id, clientDTO.getPhoneNumberAdditional());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //добавление емейла
-    @PutMapping("/client/{id}/email")
+    //добавление/изменение второго емейла
+    @PutMapping("/client/{id}/second_email")
     public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -93,7 +93,47 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addEmail(id, clientDTO.getEmailAdditional());
+        clientService.addAdditionalEmail(id, clientDTO.getEmailAdditional());
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    //изменение основного емейла
+    @PutMapping("/client/{id}/main_email")
+    public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+                                                         BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ClientNotCreatedException(errorMessage.toString());
+        }
+        clientService.changeMainEmail(id, clientDTO.getEmailMain());
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    //изменение основного телефона
+    @PutMapping("/client/{id}/main_phone")
+    public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
+                                                      BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ClientNotCreatedException(errorMessage.toString());
+        }
+        clientService.changeMainPhone(id, clientDTO.getPhoneNumberMain());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }

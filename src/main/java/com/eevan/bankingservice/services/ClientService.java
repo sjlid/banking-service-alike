@@ -28,24 +28,40 @@ public class ClientService {
         clientsRepository.save(client);
     }
 
-    //добавление телефона
+    //добавление/изменение второго телефона
     @Transactional
-    public void addPhone(int id, String phoneNumber) {
-        Client updatedClient = clientsRepository.findById(id);
+    public void addAdditionalPhone(int id, String phoneNumber) {
+        Client updatedClient = findClientById(id);
         updatedClient.setPhoneNumberAdditional(phoneNumber);
         clientsRepository.save(updatedClient);
     }
 
-    //добавление емейла
+    //добавление/изменение второго емейла
     @Transactional
-    public void addEmail(int id, String email) {
-        Client updatedClient = clientsRepository.findById(id);
+    public void addAdditionalEmail(int id, String email) {
+        Client updatedClient = findClientById(id);
         updatedClient.setEmailAdditional(email);
         clientsRepository.save(updatedClient);
     }
-    //изменение телефона
-    //изменение емейла
+
+    //изменение основного телефона
+    @Transactional
+    public void changeMainPhone(int id, String phoneNumber) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setPhoneNumberMain(phoneNumber);
+        clientsRepository.save(updatedClient);
+    }
+
+    //изменение основного емейла
+    @Transactional
+    public void changeMainEmail(int id, String email) {
+        Client updatedClient = findClientById(id);
+        updatedClient.setEmailMain(email);
+        clientsRepository.save(updatedClient);
+    }
+
     //удаление телефона
+
     //удаление емейла
 
     //поиск клиентов по дате рождения
@@ -74,5 +90,12 @@ public class ClientService {
     public List<Client> findClientByFIO(String surname, String name, String patronymic) {
         Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic);
         return foundClients.orElseThrow(ClientNotFoundException::new);
+    }
+
+    //поиск клиента по айди
+    @Transactional(readOnly = true)
+    public Client findClientById(int id) {
+        Optional<Client> foundClient = clientsRepository.findById(id);
+        return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 }
