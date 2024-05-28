@@ -1,5 +1,6 @@
 package com.eevan.bankingservice.services;
 
+import com.eevan.bankingservice.dto.PhoneDTO;
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.repositories.ClientsRepository;
 import com.eevan.bankingservice.utils.ClientNotFoundException;
@@ -30,13 +31,17 @@ public class ClientService {
     //добавление телефона
     @Transactional
     public void addPhone(int id, String phoneNumber) {
-        //TODO
+        Client updatedClient = clientsRepository.findById(id);
+        updatedClient.setPhoneNumberAdditional(phoneNumber);
+        clientsRepository.save(updatedClient);
     }
 
     //добавление емейла
     @Transactional
-    public void addEmail(Client client) {
-        //TODO
+    public void addEmail(int id, String email) {
+        Client updatedClient = clientsRepository.findById(id);
+        updatedClient.setEmailAdditional(email);
+        clientsRepository.save(updatedClient);
     }
     //изменение телефона
     //изменение емейла

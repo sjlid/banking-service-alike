@@ -1,6 +1,8 @@
 package com.eevan.bankingservice.controllers;
 
 import com.eevan.bankingservice.dto.ClientDTO;
+import com.eevan.bankingservice.dto.EmailDTO;
+import com.eevan.bankingservice.dto.PhoneDTO;
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.services.ClientService;
 import com.eevan.bankingservice.utils.ClientErrorResponse;
@@ -58,7 +60,7 @@ public class ClientController {
 
     //добавление телефона
     @PutMapping("/client/{id}/phone")
-    public ResponseEntity<HttpStatus> addAdditionalPhone(@RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -71,14 +73,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        //TODO
+        clientService.addPhone(id, clientDTO.getPhoneNumberAdditional());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //добавление емейла
     @PutMapping("/client/{id}/email")
-    public ResponseEntity<HttpStatus> addAdditionalEmail(@RequestBody @Valid ClientDTO clientDTO,
+    public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientDTO clientDTO,
                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -91,7 +93,7 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-        clientService.addEmail(convertToClient(clientDTO));
+        clientService.addEmail(id, clientDTO.getEmailAdditional());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
