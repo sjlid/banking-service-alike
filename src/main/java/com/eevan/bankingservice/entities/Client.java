@@ -58,7 +58,6 @@ public class Client {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
-//    @OneToOne
 //    @JoinColumn(name = "account_id")
 //    private ClientBankAccount clientBankAccount;
 
