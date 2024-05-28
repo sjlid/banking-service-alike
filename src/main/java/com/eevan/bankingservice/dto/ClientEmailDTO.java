@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EmailDTO {
+public class ClientEmailDTO {
     @NotEmpty(message = "Email should not be empty")
     private String emailMain;
     private String emailAdditional;

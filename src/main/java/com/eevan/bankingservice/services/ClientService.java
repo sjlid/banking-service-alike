@@ -1,6 +1,5 @@
 package com.eevan.bankingservice.services;
 
-import com.eevan.bankingservice.dto.PhoneDTO;
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.repositories.ClientsRepository;
 import com.eevan.bankingservice.utils.ClientNotFoundException;

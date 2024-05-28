@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PhoneDTO {
+public class ClientPhoneDTO {
     @NotEmpty(message = "Phone should not be empty")
     private String phoneNumberMain;
     private String phoneNumberAdditional;

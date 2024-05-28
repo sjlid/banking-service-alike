@@ -1,8 +1,6 @@
 package com.eevan.bankingservice.controllers;
 
 import com.eevan.bankingservice.dto.ClientDTO;
-import com.eevan.bankingservice.dto.EmailDTO;
-import com.eevan.bankingservice.dto.PhoneDTO;
 import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.services.ClientService;
 import com.eevan.bankingservice.utils.ClientErrorResponse;
