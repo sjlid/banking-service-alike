@@ -14,4 +14,5 @@ public interface ClientsRepository extends JpaRepository<Client, Integer> {
     Optional<Client> findByPhoneNumberMainOrPhoneNumberAdditional(String phoneNumber1, String phoneNumber2);
     Optional<List<Client>> findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(String surname, String name, String patronymic);
     Optional<List<Client>> findByDateOfBirthAfter(LocalDate birthdate);
+    Optional<Client> findById(long id);
 }

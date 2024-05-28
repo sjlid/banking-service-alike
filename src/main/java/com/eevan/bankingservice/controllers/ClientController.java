@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -55,6 +56,26 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    //добавление телефона
+    @PutMapping("/client/phone_additional")
+    public ResponseEntity<HttpStatus> addAdditionalPhone(@RequestBody @Valid ClientDTO clientDTO,
+                                                         BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ClientNotCreatedException(errorMessage.toString());
+        }
+        clientService.addPhone(convertToClient(clientDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
     //поиск клиента по емейлу
     @GetMapping("/clients/email")
     public ClientDTO getClientsByEmail(@RequestParam String email) {
@@ -63,20 +84,26 @@ public class ClientController {
 
     //поиск клиента по дате рождения
     @GetMapping("/clients/birthdate")
-    public List<Client> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate) {
-        return clientService.findClientByBirthdate(birthdate);
+    public List<ClientDTO> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate) {
+        return clientService.findClientByBirthdate(birthdate)
+                .stream()
+                .map(this::convertToClientDTO)
+                .collect(Collectors.toList());
     }
 
     //поиск клиента по телефону
     @GetMapping("/clients/phone")
-    public Client getClientsByPhone(@RequestParam String phoneNumber) {
-        return clientService.findClientByPhone(phoneNumber);
+    public ClientDTO getClientsByPhone(@RequestParam String phoneNumber) {
+        return convertToClientDTO(clientService.findClientByPhone(phoneNumber));
     }
 
     //поиск клиента по ФИО
     @GetMapping("/clients/person")
-    public List<Client> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
-        return clientService.findClientByFIO(name, surname, patronymic);
+    public List<ClientDTO> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
+        return clientService.findClientByFIO(name, surname, patronymic)
+                .stream()
+                .map(this::convertToClientDTO)
+                .collect(Collectors.toList());
     }
 
     //маппинг из дто в объект

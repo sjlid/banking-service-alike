@@ -28,6 +28,15 @@ public class ClientService {
     }
 
     //добавление телефона
+    @Transactional
+    public void addPhone(Client client) {
+        Client updatingClient = getClient(client);
+        if (updatingClient != null && updatingClient.getPhoneNumberAdditional() == null) {
+            updatingClient.setPhoneNumberAdditional(client.getPhoneNumberAdditional());
+            clientsRepository.save(updatingClient);
+        }
+    }
+
     //добавление емейла
     //изменение телефона
     //изменение емейла
@@ -60,5 +69,12 @@ public class ClientService {
     public List<Client> findClientByFIO(String surname, String name, String patronymic) {
         Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic);
         return foundClients.orElseThrow(ClientNotFoundException::new);
+    }
+
+    //поиск по айдишнику
+    @Transactional(readOnly = true)
+    public Client getClient(Client client) {
+        Optional<Client> foundClient = clientsRepository.findById(client.getId());
+        return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 }
