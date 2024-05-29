@@ -59,6 +59,7 @@ public class Client {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
+    @NotEmpty(message = "Funds should not be empty")
     @Column(name = "funds")
     private BigDecimal funds;
 
