@@ -17,6 +17,8 @@ public class ClientDTO {
     @NotEmpty(message = "Login should not be empty")
     private String login;
 
+    private String password;
+
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
@@ -37,6 +39,5 @@ public class ClientDTO {
     private String emailMain;
     private String emailAdditional;
 
-    @NotEmpty(message = "Funds should not be empty")
     private BigDecimal funds;
 }

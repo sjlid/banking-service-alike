@@ -4,6 +4,9 @@ import com.eevan.bankingservice.entities.Client;
 import com.eevan.bankingservice.repositories.ClientsRepository;
 import com.eevan.bankingservice.utils.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,8 +73,9 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public List<Client> findClientByBirthdate(LocalDate birthdate) {
-        Optional<List<Client>> foundClients = clientsRepository.findByDateOfBirthAfter(birthdate);
+    public List<Client> findClientByBirthdate(LocalDate birthdate, int pageNo, int recordCount) {
+        Pageable pageable = PageRequest.of(pageNo, recordCount);
+        Optional<List<Client>> foundClients = clientsRepository.findByDateOfBirthAfter(birthdate, pageable);
         return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 
@@ -88,8 +92,9 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public List<Client> findClientByFIO(String surname, String name, String patronymic) {
-        Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic);
+    public List<Client> findClientByFIO(String surname, String name, String patronymic,  int pageNo, int recordCount) {
+        Pageable pageable = PageRequest.of(pageNo, recordCount);
+        Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic, pageable);
         return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 

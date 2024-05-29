@@ -173,9 +173,11 @@ public class ClientController {
         return convertToClientDTO(clientService.findClientByEmail(email));
     }
 
-    @GetMapping("/clients/birthdate")
-    public List<ClientDTO> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate) {
-        return clientService.findClientByBirthdate(birthdate)
+    @GetMapping("/clients/birthdate/{pageNo}/{recordCount}")
+    public List<ClientDTO> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate,
+                                                 @PathVariable int pageNo,
+                                                 @PathVariable int recordCount) {
+        return clientService.findClientByBirthdate(birthdate, pageNo, recordCount)
                 .stream()
                 .map(this::convertToClientDTO)
                 .collect(Collectors.toList());
@@ -186,9 +188,13 @@ public class ClientController {
         return convertToClientDTO(clientService.findClientByPhone(phoneNumber));
     }
 
-    @GetMapping("/clients/person")
-    public List<ClientDTO> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
-        return clientService.findClientByFIO(name, surname, patronymic)
+    @GetMapping("/clients/person/{pageNo}/{recordCount}")
+    public List<ClientDTO> getClientsByFIO(@RequestParam String name,
+                                           @RequestParam String surname,
+                                           @RequestParam String patronymic,
+                                           @PathVariable int pageNo,
+                                           @PathVariable int recordCount) {
+        return clientService.findClientByFIO(name, surname, patronymic, pageNo, recordCount)
                 .stream()
                 .map(this::convertToClientDTO)
                 .collect(Collectors.toList());
