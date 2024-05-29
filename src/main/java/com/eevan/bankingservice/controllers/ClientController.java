@@ -35,7 +35,6 @@ public class ClientController {
         this.modelMapper = modelMapper;
     }
 
-    //добавление клиента
     @PostMapping("/client")
     public ResponseEntity<HttpStatus> addClient(@RequestBody @Valid ClientDTO clientDTO,
                                                 BindingResult bindingResult) {
@@ -55,7 +54,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //изменение основного телефона
     @PutMapping("/client/{id}/main_phone")
     public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                       BindingResult bindingResult) {
@@ -75,7 +73,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //изменение основного емейла
     @PutMapping("/client/{id}/main_email")
     public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                          BindingResult bindingResult) {
@@ -95,7 +92,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //добавление/изменение второго телефона
     @PutMapping("/client/{id}/second_phone")
     public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                          BindingResult bindingResult) {
@@ -115,7 +111,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //добавление/изменение второго емейла
     @PutMapping("/client/{id}/second_email")
     public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                          BindingResult bindingResult) {
@@ -135,7 +130,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //удаление второго номера телефона
     @PutMapping("/client/{id}/cleared_phone")
     public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable int id, @RequestBody @Valid ClientPhoneDTO clientPhoneDTO,
                                                             BindingResult bindingResult) {
@@ -155,7 +149,6 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //удаление второго емейла
     @PutMapping("/client/{id}/cleared_email")
     public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable int id, @RequestBody @Valid ClientEmailDTO clientEmailDTO,
                                                             BindingResult bindingResult) {
@@ -175,13 +168,11 @@ public class ClientController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //поиск клиента по емейлу
     @GetMapping("/clients/email")
     public ClientDTO getClientsByEmail(@RequestParam String email) {
         return convertToClientDTO(clientService.findClientByEmail(email));
     }
 
-    //поиск клиента по дате рождения
     @GetMapping("/clients/birthdate")
     public List<ClientDTO> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate) {
         return clientService.findClientByBirthdate(birthdate)
@@ -190,13 +181,11 @@ public class ClientController {
                 .collect(Collectors.toList());
     }
 
-    //поиск клиента по телефону
     @GetMapping("/clients/phone")
     public ClientDTO getClientsByPhone(@RequestParam String phoneNumber) {
         return convertToClientDTO(clientService.findClientByPhone(phoneNumber));
     }
 
-    //поиск клиента по ФИО
     @GetMapping("/clients/person")
     public List<ClientDTO> getClientsByFIO(@RequestParam String name,@RequestParam String surname,@RequestParam String patronymic) {
         return clientService.findClientByFIO(name, surname, patronymic)
@@ -205,13 +194,11 @@ public class ClientController {
                 .collect(Collectors.toList());
     }
 
-    //маппинг из дто в объект
     private Client convertToClient(ClientDTO clientDTO) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(clientDTO, Client.class);
     }
 
-    //маппинг из объекта в дто
     private ClientDTO convertToClientDTO(Client client) {
         return modelMapper.map(client, ClientDTO.class);
     }
