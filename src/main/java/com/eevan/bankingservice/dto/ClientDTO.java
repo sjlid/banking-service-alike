@@ -18,6 +18,7 @@ public class ClientDTO {
     @NotEmpty(message = "Login should not be empty")
     private String login;
 
+    @NotEmpty(message = "Password should not be empty")
     private String password;
 
     @NotEmpty(message = "Name should not be empty")
@@ -29,6 +30,7 @@ public class ClientDTO {
     private String surname;
     private String patronymic;
 
+    @NotEmpty(message = "Date of birth should not be empty")
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
 
@@ -40,5 +42,6 @@ public class ClientDTO {
     private String emailMain;
     private String emailAdditional;
 
+    @NotEmpty(message = "Funds should not be empty")
     private BigDecimal funds;
 }

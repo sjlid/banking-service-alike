@@ -9,6 +9,8 @@ import com.eevan.bankingservice.utils.ClientErrorResponse;
 import com.eevan.bankingservice.utils.ClientNotCreatedException;
 import com.eevan.bankingservice.utils.ClientNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -32,6 +34,11 @@ public class ClientController {
     private final ModelMapper modelMapper;
 
     @Operation(summary = "Create new client", description = "Here you can create a new client", tags = { "client" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Client has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/client")
     public ResponseEntity<HttpStatus> addClient(@RequestBody @Valid ClientDTO clientDTO,
                                                 BindingResult bindingResult) {

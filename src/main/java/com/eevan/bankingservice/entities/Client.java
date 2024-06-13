@@ -42,6 +42,7 @@ public class Client {
     @Column(name = "patronymic")
     private String patronymic;
 
+    @NotEmpty(message = "Date of birth should not be empty")
     @Column(name = "birth_date")
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
@@ -60,6 +61,7 @@ public class Client {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
+    @NotEmpty(message = "Funds should not be empty")
     @Column(name = "funds")
     private BigDecimal funds;
 
