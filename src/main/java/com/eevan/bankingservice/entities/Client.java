@@ -1,29 +1,31 @@
 package com.eevan.bankingservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "Clients")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @NotEmpty(message = "Login should not be empty")
     @Column(name = "login")
     private String login;
 
+    @NotEmpty(message = "Password should not be empty")
     @Column(name = "password")
     private String password;
 
@@ -74,6 +76,4 @@ public class Client {
         this.funds = funds;
     }
 
-    public Client() {
-    }
 }

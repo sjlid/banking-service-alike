@@ -10,6 +10,4 @@ import lombok.Setter;
 public class ClientErrorResponse {
     private String message;
     private long timestamp;
-
-
 }
