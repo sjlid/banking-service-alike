@@ -17,7 +17,7 @@ public class TestBankingserviceApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.from(BankingserviceApplication::main).with(TestBankingserviceApplication.class).run(args);
+		SpringApplication.from(BankingServiceApplication::main).with(TestBankingserviceApplication.class).run(args);
 	}
 
 }

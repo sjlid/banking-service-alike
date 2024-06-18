@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class BankingserviceApplication {
+public class BankingServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BankingserviceApplication.class, args);
+		SpringApplication.run(BankingServiceApplication.class, args);
 	}
 
 	@Bean
