@@ -48,4 +48,4 @@ WIP
 - OpenAPI
 - REST API
 - PostgreSQL
-- Maven
+- Gradle
