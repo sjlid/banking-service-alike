@@ -9,7 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClientEmailDTO {
+    @Schema(description = "Client's email")
     @NotEmpty(message = "Email should not be empty")
     private String emailMain;
+
+    @Schema(description = "Client's additional email if exists. Not necessary field")
     private String emailAdditional;
 }
