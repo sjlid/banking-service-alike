@@ -6,6 +6,8 @@ import com.eevan.bankingservice.utils.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,5 +111,21 @@ public class ClientService {
     public Client findClientById(int id) {
         Optional<Client> foundClient = clientsRepository.findById(id);
         return foundClient.orElseThrow(ClientNotFoundException::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Client findByLogin(String login) {
+        Optional<Client> foundClient = clientsRepository.findByLogin(login);
+        return foundClient.orElseThrow(ClientNotFoundException::new);
+    }
+
+    public UserDetailsService userDetailsService() {
+        return this::findByLogin;
+    }
+
+    @Transactional(readOnly = true)
+    public Client getCurrentClient() {
+        var login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return findByLogin(login);
     }
 }
