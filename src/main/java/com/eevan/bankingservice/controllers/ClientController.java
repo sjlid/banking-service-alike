@@ -33,6 +33,12 @@ public class ClientController {
     private final ClientService clientService;
     private final ModelMapper modelMapper;
 
+    @GetMapping
+    @Operation(summary = "Доступен только авторизованным пользователям")
+    public String example() {
+        return "Hello, world!";
+    }
+
     @Operation(summary = "Change a main phone number", description = "Here you can change a main number of client",
             tags = { "client" })
     @PutMapping("/client/{id}/main_phone")
