@@ -8,7 +8,7 @@ import lombok.Setter;
 @Schema(description = "Client's email DTO")
 @Getter
 @Setter
-public class ClientEmailDTO {
+public class ClientEmailDto {
     @Schema(description = "Client's email")
     @NotEmpty(message = "Email should not be empty")
     private String emailMain;

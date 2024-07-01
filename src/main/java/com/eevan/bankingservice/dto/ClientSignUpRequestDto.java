@@ -2,24 +2,26 @@ package com.eevan.bankingservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Schema(description = "Client's DTO")
-@Getter
-@Setter
-public class ClientDTO {
-
-    @Schema(description = "Client's login")
+@Schema(description = "Client's signing up DTO")
+@Data
+public class ClientSignUpRequestDto {
+    @Schema(description = "User's login")
     @NotEmpty(message = "Login should not be empty")
+    @Column(name = "login")
     private String login;
 
+    @Schema(description = "User's password")
     @NotEmpty(message = "Password should not be empty")
+    @Column(name = "password")
     private String password;
 
     @Schema(description = "Client's name")
@@ -44,15 +46,10 @@ public class ClientDTO {
     @NotEmpty(message = "Phone should not be empty")
     private String phoneNumberMain;
 
-    @Schema(description = "Client's additional phone number if exists. Not necessary field")
-    private String phoneNumberAdditional;
-
     @Schema(description = "Client's email")
     @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be user@example.com alike")
     private String emailMain;
-
-    @Schema(description = "Client's additional email if exists. Not necessary field")
-    private String emailAdditional;
 
     @Schema(description = "Client's funds")
     @NotEmpty(message = "Funds should not be empty")

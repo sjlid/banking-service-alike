@@ -8,7 +8,7 @@ import lombok.Setter;
 @Schema(description = "Client's phone DTO")
 @Getter
 @Setter
-public class ClientPhoneDTO {
+public class ClientPhoneDto {
     @Schema(description = "Client's main phone number")
     @NotEmpty(message = "Phone should not be empty")
     private String phoneNumberMain;

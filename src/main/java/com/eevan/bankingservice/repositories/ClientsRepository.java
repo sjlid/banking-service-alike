@@ -19,4 +19,7 @@ public interface ClientsRepository extends JpaRepository<Client, Integer> {
                                                                                       Pageable pageable);
     Optional<List<Client>> findByDateOfBirthAfter(LocalDate birthdate, Pageable pageable);
     Optional<Client> findById(long id);
+    Optional<Client> findByLogin(String login);
+    boolean existsByLogin(String login);
+    boolean existsByEmailMain(String emailMain);
 }

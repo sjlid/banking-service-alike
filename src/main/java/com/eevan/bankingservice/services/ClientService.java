@@ -26,6 +26,14 @@ public class ClientService {
 
     @Transactional
     public void save(Client client) {
+        if (clientsRepository.existsByLogin(client.getLogin())) {
+            throw new RuntimeException("User with the same login is existing");
+        }
+
+        if (clientsRepository.existsByEmailMain(client.getEmailMain())) {
+            throw new RuntimeException("User with the same email is existing");
+        }
+
         clientsRepository.save(client);
     }
 
