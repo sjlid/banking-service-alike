@@ -33,21 +33,6 @@ public class ClientController {
     private final ClientService clientService;
     private final ModelMapper modelMapper;
 
-    @Operation(summary = "Create new client", description = "Here you can create a new client",
-            tags = { "client" })
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Client has created"),
-            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
-            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
-    })
-    @PostMapping("/client")
-    public ResponseEntity<HttpStatus> addClient(@RequestBody @Valid ClientDto clientDto,
-                                                BindingResult bindingResult) {
-        ErrorClientCreatingExceptionThrow(bindingResult);
-        clientService.save(convertToClient(clientDto));
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
     @Operation(summary = "Change a main phone number", description = "Here you can change a main number of client",
             tags = { "client" })
     @PutMapping("/client/{id}/main_phone")
