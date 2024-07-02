@@ -36,6 +36,10 @@ public class ClientService {
             throw new RuntimeException("User with the same email is existing");
         }
 
+        if (clientsRepository.existsByPhoneNumberMain(client.getPhoneNumberMain())) {
+            throw new RuntimeException("User with the same phone number is existing");
+        }
+
         clientsRepository.save(client);
     }
 
@@ -101,7 +105,7 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public List<Client> findClientByFIO(String surname, String name, String patronymic,  int pageNo, int recordCount) {
+    public List<Client> findClientByFIO(String surname, String name, String patronymic, int pageNo, int recordCount) {
         Pageable pageable = PageRequest.of(pageNo, recordCount);
         Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic, pageable);
         return foundClients.orElseThrow(ClientNotFoundException::new);

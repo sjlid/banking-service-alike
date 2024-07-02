@@ -23,7 +23,7 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     @Operation(summary = "Create new client", description = "Here you can create a new client",
-            tags = { "client" })
+            tags = {"client"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Client has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
