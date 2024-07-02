@@ -23,8 +23,14 @@ public class AuthenticationService {
 
         var client = Client.builder()
                 .login(request.getLogin())
-                .emailMain(request.getEmailMain())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .name(request.getName())
+                .surname(request.getSurname())
+                .patronymic(request.getPatronymic())
+                .emailMain(request.getEmailMain())
+                .phoneNumberMain(request.getPhoneNumberMain())
+                .dateOfBirth(request.getDateOfBirth())
+                .funds(request.getFunds())
                 .build();
 
         clientService.save(client);

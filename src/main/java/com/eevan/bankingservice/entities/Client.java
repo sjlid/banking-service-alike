@@ -3,6 +3,7 @@ package com.eevan.bankingservice.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,7 +52,7 @@ public class Client implements UserDetails {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @NotEmpty(message = "Date of birth should not be empty")
+    @NotNull(message = "Date of birth should not be empty")
     @Column(name = "birth_date")
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
@@ -70,7 +71,7 @@ public class Client implements UserDetails {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
-    @NotEmpty(message = "Funds should not be empty")
+    @NotNull(message = "Funds should not be empty")
     @Column(name = "funds")
     private BigDecimal funds;
 

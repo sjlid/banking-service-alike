@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -38,7 +39,7 @@ public class ClientSignUpRequestDto {
     private String patronymic;
 
     @Schema(description = "Client's date of birth")
-    @NotEmpty(message = "Date of birth should not be empty")
+    @NotNull(message = "Date of birth should not be empty")
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dateOfBirth;
 
@@ -52,6 +53,6 @@ public class ClientSignUpRequestDto {
     private String emailMain;
 
     @Schema(description = "Client's funds")
-    @NotEmpty(message = "Funds should not be empty")
+    @NotNull(message = "Funds should not be empty")
     private BigDecimal funds;
 }
