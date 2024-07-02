@@ -1,6 +1,12 @@
 # bankingservice
 WIP
 
+Для запуска приложения небходимо:
+1) Создать БД с именем bank_db (порт 5432)
+2) Сбилдить в Gradle
+3) Запустить созданный jar-файл
+Опционально: зайти в сваггер для просмотра всей документации по реализации
+
 Страница Swagger с документацией: http://localhost:8080/swagger-ui/index.html
 
 Настройки БД для подключения в application.properties (по факту все настройки там уже прописаны): spring.datasource.url=jdbc:postgresql://localhost:5432/bank_db
