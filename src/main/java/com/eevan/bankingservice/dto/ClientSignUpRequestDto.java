@@ -3,10 +3,7 @@ package com.eevan.bankingservice.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -53,6 +50,7 @@ public class ClientSignUpRequestDto {
     private String emailMain;
 
     @Schema(description = "Client's funds")
+    @Positive(message = "Funds balance should be positive")
     @NotNull(message = "Funds should not be empty")
     private BigDecimal funds;
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +57,7 @@ public class ClientDto {
     private String emailAdditional;
 
     @Schema(description = "Client's funds")
+    @Positive(message = "Funds balance should be positive")
     @NotNull(message = "Funds should not be empty")
     private BigDecimal funds;
 }

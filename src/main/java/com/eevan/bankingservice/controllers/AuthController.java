@@ -34,7 +34,13 @@ public class AuthController {
         return authenticationService.signUp(request);
     }
 
-    @Operation(summary = "Client authorization")
+    @Operation(summary = "Login as client", description = "Here you can logging in as a client",
+            tags = {"client"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Client has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/sign-in")
     public JwtAuthenticationResponseDto signIn(@RequestBody @Valid ClientSignInRequestDto request) {
         return authenticationService.signIn(request);

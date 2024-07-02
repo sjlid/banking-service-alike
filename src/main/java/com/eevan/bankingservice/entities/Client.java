@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -71,6 +72,7 @@ public class Client implements UserDetails {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
+    @Positive(message = "Funds balance should be positive")
     @NotNull(message = "Funds should not be empty")
     @Column(name = "funds")
     private BigDecimal funds;
