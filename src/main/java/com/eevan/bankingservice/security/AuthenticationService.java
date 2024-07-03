@@ -30,7 +30,7 @@ public class AuthenticationService {
                 .emailMain(request.getEmailMain())
                 .phoneNumberMain(request.getPhoneNumberMain())
                 .dateOfBirth(request.getDateOfBirth())
-                .funds(request.getFunds())
+                .initialBalance(request.getInitialBalance())
                 .build();
 
         clientService.save(client);

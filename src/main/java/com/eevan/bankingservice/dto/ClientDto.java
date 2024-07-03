@@ -59,5 +59,5 @@ public class ClientDto {
     @Schema(description = "Client's funds")
     @Positive(message = "Funds balance should be positive")
     @NotNull(message = "Funds should not be empty")
-    private BigDecimal funds;
+    private Double initialBalance;
 }

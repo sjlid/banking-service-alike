@@ -34,7 +34,7 @@ public class ClientController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    @Operation(summary = "Доступен только авторизованным пользователям")
+    @Operation(summary = "Only authorized users")
     public String example() {
         return "Hello, world!";
     }

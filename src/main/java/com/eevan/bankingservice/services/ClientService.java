@@ -132,4 +132,16 @@ public class ClientService {
         var login = SecurityContextHolder.getContext().getAuthentication().getName();
         return findByLogin(login);
     }
+
+    @Transactional
+    public void updateBalance() {
+        List<Client> clients = clientsRepository.findAll();
+        for (Client client : clients) {
+            double maxBalance = client.getInitialBalance() * 2.07;
+            if (client.getCurrentBalance() <= maxBalance) {
+                client.setCurrentBalance(Math.min(client.getCurrentBalance() * 1.05, maxBalance));
+                clientsRepository.save(client);
+            }
+        }
+    }
 }

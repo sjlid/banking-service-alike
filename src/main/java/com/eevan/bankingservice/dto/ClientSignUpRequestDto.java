@@ -49,8 +49,8 @@ public class ClientSignUpRequestDto {
     @Email(message = "Email should be user@example.com alike")
     private String emailMain;
 
-    @Schema(description = "Client's funds")
-    @Positive(message = "Funds balance should be positive")
-    @NotNull(message = "Funds should not be empty")
-    private BigDecimal funds;
+    @Schema(description = "Client's balance")
+    @Positive(message = "Initial balance should be positive")
+    @NotNull(message = "Initial balance should not be empty")
+    private Double initialBalance;
 }

@@ -11,13 +11,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Builder
@@ -72,10 +70,13 @@ public class Client implements UserDetails {
     @Column(name = "email_additional", unique = true)
     private String emailAdditional;
 
-    @Positive(message = "Funds balance should be positive")
-    @NotNull(message = "Funds should not be empty")
-    @Column(name = "funds")
-    private BigDecimal funds;
+    @Positive(message = "Initial balance should be positive")
+    @NotNull(message = "Initial balance should not be empty")
+    @Column(name = "initial_balance")
+    private Double initialBalance;
+
+    @Column(name = "current_balance")
+    private Double currentBalance;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
