@@ -144,4 +144,26 @@ public class ClientService {
             }
         }
     }
+
+    @Transactional
+    public void transferMoney(Long fromClientId, Long toClientId, double amount) {
+        if (fromClientId.equals(toClientId)) {
+            throw new IllegalArgumentException("Cannot transfer money to the same client");
+        }
+
+        Client fromClient = clientsRepository.findById(fromClientId)
+                .orElseThrow(() -> new IllegalArgumentException("Client not found: " + fromClientId));
+        Client toClient = clientsRepository.findById(toClientId)
+                .orElseThrow(() -> new IllegalArgumentException("Client not found: " + toClientId));
+
+        if (fromClient.getCurrentBalance() < amount) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+
+        fromClient.setCurrentBalance(fromClient.getCurrentBalance() - amount);
+        toClient.setCurrentBalance(toClient.getCurrentBalance() + amount);
+
+        clientsRepository.save(fromClient);
+        clientsRepository.save(toClient);
+    }
 }

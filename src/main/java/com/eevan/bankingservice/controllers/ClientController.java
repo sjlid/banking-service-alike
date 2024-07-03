@@ -33,12 +33,6 @@ public class ClientController {
     private final ClientService clientService;
     private final ModelMapper modelMapper;
 
-    @GetMapping
-    @Operation(summary = "Only authorized users")
-    public String example() {
-        return "Hello, world!";
-    }
-
     @Operation(summary = "Change a main phone number", description = "Here you can change a main number of client",
             tags = { "client" })
     @PutMapping("/client/{id}/main_phone")
@@ -168,5 +162,14 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
+    }
+
+    @PostMapping("/transfer")
+    public String transferMoney(
+            @RequestParam Long fromAccountId,
+            @RequestParam Long toAccountId,
+            @RequestParam double amount) {
+        clientService.transferMoney(fromAccountId, toAccountId, amount);
+        return "Transfer successful";
     }
 }
