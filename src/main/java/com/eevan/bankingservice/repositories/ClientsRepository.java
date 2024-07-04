@@ -31,4 +31,9 @@ public interface ClientsRepository extends JpaRepository<Client, Integer> {
     boolean existsByEmailMain(String emailMain);
 
     boolean existsByPhoneNumberMain(String phoneMain);
+
+    boolean existsByPhoneNumberMainOrPhoneNumberAdditional(String phoneNumber1, String phoneNumber2);
+
+    boolean existsByEmailMainOrEmailAdditional(String email1, String email2);
+
 }

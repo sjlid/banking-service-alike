@@ -32,11 +32,13 @@ public class ClientService {
             throw new RuntimeException("User with the same login is existing");
         }
 
-        if (clientsRepository.existsByEmailMain(client.getEmailMain())) {
+        if (clientsRepository.existsByEmailMainOrEmailAdditional(client.getEmailMain(),
+                client.getEmailMain())) {
             throw new RuntimeException("User with the same email is existing");
         }
 
-        if (clientsRepository.existsByPhoneNumberMain(client.getPhoneNumberMain())) {
+        if (clientsRepository.existsByPhoneNumberMainOrPhoneNumberAdditional(client.getPhoneNumberMain(),
+                client.getPhoneNumberMain())) {
             throw new RuntimeException("User with the same phone number is existing");
         }
 
@@ -45,6 +47,9 @@ public class ClientService {
 
     @Transactional
     public void changeMainPhone(int id, String phoneNumber) {
+        if (clientsRepository.existsByPhoneNumberMainOrPhoneNumberAdditional(phoneNumber, phoneNumber)) {
+            throw new RuntimeException("User with the same phone number is existing");
+        }
         Client updatedClient = findClientById(id);
         updatedClient.setPhoneNumberMain(phoneNumber);
         clientsRepository.save(updatedClient);
@@ -52,6 +57,9 @@ public class ClientService {
 
     @Transactional
     public void changeMainEmail(int id, String email) {
+        if (clientsRepository.existsByEmailMainOrEmailAdditional(email, email)) {
+            throw new RuntimeException("User with the same email is existing");
+        }
         Client updatedClient = findClientById(id);
         updatedClient.setEmailMain(email);
         clientsRepository.save(updatedClient);
@@ -59,6 +67,9 @@ public class ClientService {
 
     @Transactional
     public void addAdditionalPhone(int id, String phoneNumber) {
+        if (clientsRepository.existsByPhoneNumberMainOrPhoneNumberAdditional(phoneNumber, phoneNumber)) {
+            throw new RuntimeException("User with the same phone number is existing");
+        }
         Client updatedClient = findClientById(id);
         updatedClient.setPhoneNumberAdditional(phoneNumber);
         clientsRepository.save(updatedClient);
@@ -66,6 +77,9 @@ public class ClientService {
 
     @Transactional
     public void addAdditionalEmail(int id, String email) {
+        if (clientsRepository.existsByEmailMainOrEmailAdditional(email, email)) {
+            throw new RuntimeException("User with the same email is existing");
+        }
         Client updatedClient = findClientById(id);
         updatedClient.setEmailAdditional(email);
         clientsRepository.save(updatedClient);
@@ -94,7 +108,8 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public Client findClientByPhone(String phoneNumber) {
-        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMainOrPhoneNumberAdditional(phoneNumber, phoneNumber);
+        Optional<Client> foundClient = clientsRepository.findByPhoneNumberMainOrPhoneNumberAdditional(phoneNumber,
+                phoneNumber);
         return foundClient.orElseThrow(ClientNotFoundException::new);
     }
 
@@ -107,7 +122,11 @@ public class ClientService {
     @Transactional(readOnly = true)
     public List<Client> findClientByFIO(String surname, String name, String patronymic, int pageNo, int recordCount) {
         Pageable pageable = PageRequest.of(pageNo, recordCount);
-        Optional<List<Client>> foundClients = clientsRepository.findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname, name, patronymic, pageable);
+        Optional<List<Client>> foundClients = clientsRepository.
+                findByNameLikeAndSurnameLikeAndPatronymicLikeAllIgnoreCase(surname,
+                        name,
+                        patronymic,
+                        pageable);
         return foundClients.orElseThrow(ClientNotFoundException::new);
     }
 
