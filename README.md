@@ -1,5 +1,5 @@
 # bankingservice
-WIP
+WIP (everything is ready, need to add logging and write tests)
 
 Для запуска приложения небходимо:
 1) Создать БД с именем bank_db (порт 5432)
