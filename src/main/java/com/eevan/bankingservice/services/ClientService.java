@@ -165,14 +165,14 @@ public class ClientService {
     }
 
     @Transactional
-    public void transferMoney(Long fromClientId, Long toClientId, double amount) {
+    public synchronized void transferMoney(Long fromClientId, Long toClientId, double amount) {
         if (fromClientId.equals(toClientId)) {
             throw new IllegalArgumentException("Cannot transfer money to the same client");
         }
 
-        Client fromClient = clientsRepository.findById(fromClientId)
+        Client fromClient = clientsRepository.findByIdWithLock(fromClientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found: " + fromClientId));
-        Client toClient = clientsRepository.findById(toClientId)
+        Client toClient = clientsRepository.findByIdWithLock(toClientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found: " + toClientId));
 
         if (fromClient.getCurrentBalance() < amount) {

@@ -15,7 +15,7 @@ public class ScheduledTasksService {
 
     @Async
     @Scheduled(fixedRate = 60000)
-    public void updateClientBalances() {
+    public synchronized void updateClientBalances() {
         clientService.updateBalance();
     }
 }

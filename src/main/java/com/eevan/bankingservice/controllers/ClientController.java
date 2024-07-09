@@ -129,6 +129,16 @@ public class ClientController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Transfer money to another client", tags = { "client" })
+    @PostMapping("/transfer")
+    public String transferMoney(
+            @RequestParam Long fromAccountId,
+            @RequestParam Long toAccountId,
+            @RequestParam double amount) {
+        clientService.transferMoney(fromAccountId, toAccountId, amount);
+        return "Transfer successful";
+    }
+
     private Client convertToClient(ClientDto clientDTO) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(clientDTO, Client.class);
@@ -162,14 +172,5 @@ public class ClientController {
             }
             throw new ClientNotCreatedException(errorMessage.toString());
         }
-    }
-
-    @PostMapping("/transfer")
-    public String transferMoney(
-            @RequestParam Long fromAccountId,
-            @RequestParam Long toAccountId,
-            @RequestParam double amount) {
-        clientService.transferMoney(fromAccountId, toAccountId, amount);
-        return "Transfer successful";
     }
 }
