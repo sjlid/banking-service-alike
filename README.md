@@ -1,5 +1,5 @@
 # bankingservice
-WIP (everything is ready, need to add logging and write tests)
+WIP (everything is ready, need to add logging)
 
 Для запуска приложения небходимо:
 1) Создать БД с именем bank_db (порт 5432)
@@ -42,8 +42,7 @@ WIP (everything is ready, need to add logging and write tests)
 Нефункциональные требования:
 - Добавить OpenAPI/Swagger
 - Добавить логирование
-- Аутентификация через JWT.
-- Нужно сделать тесты на покрытие функционала трансфера денег.
+- Аутентификация через JWT
 
 Стек:
 - Java 17
@@ -51,8 +50,6 @@ WIP (everything is ready, need to add logging and write tests)
 - Spring Data JPA
 - Spring Security
 - Lombok
-- Flyway
-- TestContainers
 - OpenAPI
 - REST API
 - PostgreSQL
