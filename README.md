@@ -1,5 +1,4 @@
 # bankingservice
-WIP (everything is ready, need to add logging)
 
 Для запуска приложения небходимо:
 1) Создать БД с именем bank_db (порт 5432)
@@ -41,7 +40,6 @@ WIP (everything is ready, need to add logging)
 
 Нефункциональные требования:
 - Добавить OpenAPI/Swagger
-- Добавить логирование
 - Аутентификация через JWT
 
 Стек:
