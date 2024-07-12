@@ -34,7 +34,7 @@ public class ClientController {
     private final ModelMapper modelMapper;
 
     @Operation(summary = "Change a main phone number", description = "Here you can change a main number of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/main_phone")
     public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id,
                                                       @RequestBody @Valid ClientPhoneDto clientPhoneDto
@@ -44,7 +44,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Change a main email", description = "Here you can change a main email of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/main_email")
     public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id,
                                                       @RequestBody @Valid ClientEmailDto clientEmailDto
@@ -54,7 +54,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Add an additional phone number", description = "Here you can add an additional phone number of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/second_phone")
     public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id,
                                                          @RequestBody @Valid ClientPhoneDto clientPhoneDto
@@ -64,7 +64,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Add an additional email", description = "Here you can add an additional email of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/second_email")
     public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id,
                                                          @RequestBody @Valid ClientEmailDto clientEmailDto
@@ -74,7 +74,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Delete an additional phone number", description = "Here you can delete an additional number of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/cleared_phone")
     public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable int id) {
         clientService.deleteAdditionalPhone(id);
@@ -82,7 +82,7 @@ public class ClientController {
     }
 
     @Operation(summary = "Delete an additional email", description = "Here you can delete an additional email of client",
-            tags = { "client" })
+            tags = {"client"})
     @PutMapping("/client/{id}/cleared_email")
     public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable int id) {
         clientService.deleteAdditionalEmail(id);
@@ -90,14 +90,14 @@ public class ClientController {
     }
 
     @Operation(summary = "Get a client by email", description = "Here you can find a client by email",
-            tags = { "client" })
+            tags = {"client"})
     @GetMapping("/clients/email")
     public ClientDto getClientsByEmail(@RequestParam String email) {
         return convertToClientDTO(clientService.findClientByEmail(email));
     }
 
     @Operation(summary = "Get clients by date of birth", description = "Here you can find clients by date of birth",
-            tags = { "client" })
+            tags = {"client"})
     @GetMapping("/clients/birthdate/{pageNo}/{recordCount}")
     public List<ClientDto> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate,
                                                  @PathVariable int pageNo,
@@ -109,14 +109,14 @@ public class ClientController {
     }
 
     @Operation(summary = "Get a client by phone number", description = "Here you can find a client by phone number",
-            tags = { "client" })
+            tags = {"client"})
     @GetMapping("/clients/phone")
     public ClientDto getClientsByPhone(@RequestParam String phoneNumber) {
         return convertToClientDTO(clientService.findClientByPhone(phoneNumber));
     }
 
     @Operation(summary = "Get clients by name, surname and patronymic", description = "Here you can find clients by name, surname and patronymic",
-            tags = { "client" })
+            tags = {"client"})
     @GetMapping("/clients/person/{pageNo}/{recordCount}")
     public List<ClientDto> getClientsByFIO(@RequestParam String name,
                                            @RequestParam String surname,
