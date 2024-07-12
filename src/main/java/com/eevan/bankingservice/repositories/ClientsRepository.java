@@ -24,10 +24,8 @@ public interface ClientsRepository extends JpaRepository<Client, Integer> {
 
     Optional<List<Client>> findByDateOfBirthAfter(LocalDate birthdate, Pageable pageable);
 
-    Optional<Client> findById(long id);
-
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    Optional<Client> findByIdWithLock(long id);
+    Optional<Client> findById(long id);
 
     Optional<Client> findByLogin(String login);
 

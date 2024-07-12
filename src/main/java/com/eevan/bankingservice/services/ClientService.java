@@ -170,9 +170,9 @@ public class ClientService {
             throw new IllegalArgumentException("Cannot transfer money to the same client");
         }
 
-        Client fromClient = clientsRepository.findByIdWithLock(fromClientId)
+        Client fromClient = clientsRepository.findById(fromClientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found: " + fromClientId));
-        Client toClient = clientsRepository.findByIdWithLock(toClientId)
+        Client toClient = clientsRepository.findById(toClientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found: " + toClientId));
 
         if (fromClient.getCurrentBalance() < amount) {
