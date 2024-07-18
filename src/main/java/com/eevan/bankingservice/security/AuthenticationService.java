@@ -31,6 +31,7 @@ public class AuthenticationService {
                 .phoneNumberMain(request.getPhoneNumberMain())
                 .dateOfBirth(request.getDateOfBirth())
                 .initialBalance(request.getInitialBalance())
+                .currentBalance(request.getInitialBalance())
                 .build();
 
         clientService.save(client);
