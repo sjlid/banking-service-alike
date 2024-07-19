@@ -14,12 +14,10 @@ import java.time.LocalDate;
 public class ClientSignUpRequestDto {
     @Schema(description = "User's login")
     @NotEmpty(message = "Login should not be empty")
-    @Column(name = "login")
     private String login;
 
     @Schema(description = "User's password")
     @NotEmpty(message = "Password should not be empty")
-    @Column(name = "password")
     private String password;
 
     @Schema(description = "Client's name")
