@@ -36,7 +36,7 @@ public class ClientController {
     @Operation(summary = "Change a main phone number", description = "Here you can change a main number of client",
             tags = {"client"})
     @PutMapping("/client/{id}/main_phone")
-    public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable int id,
+    public ResponseEntity<HttpStatus> changeMainPhone(@PathVariable("id") int id,
                                                       @RequestBody @Valid ClientPhoneDto clientPhoneDto
     ) {
         clientService.changeMainPhone(id, clientPhoneDto.getPhoneNumberMain());
@@ -46,7 +46,7 @@ public class ClientController {
     @Operation(summary = "Change a main email", description = "Here you can change a main email of client",
             tags = {"client"})
     @PutMapping("/client/{id}/main_email")
-    public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable int id,
+    public ResponseEntity<HttpStatus> changeMainEmail(@PathVariable("id") int id,
                                                       @RequestBody @Valid ClientEmailDto clientEmailDto
     ) {
         clientService.changeMainEmail(id, clientEmailDto.getEmailMain());
@@ -56,7 +56,7 @@ public class ClientController {
     @Operation(summary = "Add an additional phone number", description = "Here you can add an additional phone number of client",
             tags = {"client"})
     @PutMapping("/client/{id}/second_phone")
-    public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable int id,
+    public ResponseEntity<HttpStatus> addAdditionalPhone(@PathVariable("id") int id,
                                                          @RequestBody @Valid ClientPhoneDto clientPhoneDto
     ) {
         clientService.addAdditionalPhone(id, clientPhoneDto.getPhoneNumberAdditional());
@@ -66,7 +66,7 @@ public class ClientController {
     @Operation(summary = "Add an additional email", description = "Here you can add an additional email of client",
             tags = {"client"})
     @PutMapping("/client/{id}/second_email")
-    public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable int id,
+    public ResponseEntity<HttpStatus> addAdditionalEmail(@PathVariable("id") int id,
                                                          @RequestBody @Valid ClientEmailDto clientEmailDto
     ) {
         clientService.addAdditionalEmail(id, clientEmailDto.getEmailAdditional());
@@ -76,7 +76,7 @@ public class ClientController {
     @Operation(summary = "Delete an additional phone number", description = "Here you can delete an additional number of client",
             tags = {"client"})
     @PutMapping("/client/{id}/cleared_phone")
-    public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable int id) {
+    public ResponseEntity<HttpStatus> deleteAdditionalPhone(@PathVariable("id") int id) {
         clientService.deleteAdditionalPhone(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -84,7 +84,7 @@ public class ClientController {
     @Operation(summary = "Delete an additional email", description = "Here you can delete an additional email of client",
             tags = {"client"})
     @PutMapping("/client/{id}/cleared_email")
-    public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable int id) {
+    public ResponseEntity<HttpStatus> deleteAdditionalEmail(@PathVariable("id") int id) {
         clientService.deleteAdditionalEmail(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -100,8 +100,8 @@ public class ClientController {
             tags = {"client"})
     @GetMapping("/clients/birthdate/{pageNo}/{recordCount}")
     public List<ClientDto> getClientsByBirthdate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate birthdate,
-                                                 @PathVariable int pageNo,
-                                                 @PathVariable int recordCount) {
+                                                 @PathVariable("pageNo") int pageNo,
+                                                 @PathVariable("recordCount") int recordCount) {
         return clientService.findClientByBirthdate(birthdate, pageNo, recordCount)
                 .stream()
                 .map(this::convertToClientDTO)
@@ -121,8 +121,8 @@ public class ClientController {
     public List<ClientDto> getClientsByFIO(@RequestParam String name,
                                            @RequestParam String surname,
                                            @RequestParam String patronymic,
-                                           @PathVariable int pageNo,
-                                           @PathVariable int recordCount) {
+                                           @PathVariable("pageNo") int pageNo,
+                                           @PathVariable("recordCount") int recordCount) {
         return clientService.findClientByFIO(name, surname, patronymic, pageNo, recordCount)
                 .stream()
                 .map(this::convertToClientDTO)
